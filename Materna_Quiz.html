@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Materna — Encontre o que é seu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blush-50:#FBE9EC; --blush-100:#F3D2D6; --blush-200:#EBB9C0;
+  --coral:#E89BAB; --coral-d:#D9758A;
+  --green-900:#1E4A2A; --green-800:#245634; --green-700:#2F6B43; --green-600:#4A8A60;
+  --sage:#8A968A; --sage-l:#B7C0B7;
+  --cream-50:#FAF3E8; --paper:#FFFFFF;
+  --fd:'DM Serif Display','Times New Roman',serif;
+  --fb:'Cormorant Garamond',Georgia,serif;
+  --fl:'Karla',system-ui,sans-serif;
+  --shadow-soft: 0 10px 30px rgba(30,74,42,.08);
+  --shadow-card: 0 4px 14px rgba(30,74,42,.06);
+  --shadow-cta: 0 14px 36px rgba(30,74,42,.24);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+ul,ol{list-style:none}
+html,body{background:var(--blush-100);min-height:100vh;font-family:var(--fb);color:var(--green-900);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at top, var(--blush-100), var(--blush-50) 80%)}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* App */
+.app{max-width:760px;margin:0 auto;min-height:100vh;padding:32px 28px 56px;display:flex;flex-direction:column}
+
+/* Brand */
+.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.brand-mark{font-family:var(--fd);font-size:32px;color:var(--green-900);letter-spacing:-.01em;line-height:1}
+.brand-tag{font-family:var(--fl);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green-700)}
+
+/* Type helpers */
+.eyebrow{font-family:var(--fl);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-d)}
+.eyebrow-lgt{color:var(--coral)}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.screen{animation:fadeUp .5s cubic-bezier(.4,0,.2,1)}
+
+/* ─────────────────────────────────────────
+   START SCREEN
+───────────────────────────────────────── */
+.start-shell{position:relative;padding:48px 14px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:18px}
+.start-corner{position:absolute;font-family:var(--fd);color:var(--blush-200);font-size:80px;pointer-events:none;line-height:1;opacity:.85}
+.start-corner.tl{top:0;left:0;transform:rotate(-25deg)}
+.start-corner.tr{top:0;right:0;transform:rotate(25deg)}
+.start-corner.bl{bottom:30px;left:0;transform:rotate(25deg)}
+.start-corner.br{bottom:30px;right:0;transform:rotate(-25deg)}
+.start-title{font-family:var(--fd);font-size:68px;color:var(--green-900);letter-spacing:-.01em;line-height:.95;margin-top:8px}
+.start-sub{font-family:var(--fb);font-style:italic;font-size:22px;color:var(--green-700);line-height:1.4;max-width:480px;margin-top:6px}
+.start-meta{font-family:var(--fl);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:4px}
+
+/* Path cards (escolha) */
+.path-cards{display:flex;flex-direction:column;gap:18px;width:100%;max-width:560px;margin-top:30px}
+.path-card{background:var(--paper);border:2px solid var(--blush-200);border-radius:22px;padding:28px 28px;display:flex;flex-direction:column;gap:6px;text-align:left;transition:all .28s ease;width:100%;box-shadow:var(--shadow-card);position:relative}
+.path-card:hover{border-color:var(--coral);transform:translateY(-3px);box-shadow:0 16px 36px rgba(30,74,42,.14)}
+.path-card.club{background:var(--green-900);border-color:var(--green-900)}
+.path-card-label{font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-d);margin-bottom:6px}
+.path-card.club .path-card-label{color:var(--coral)}
+.path-card-title{font-family:var(--fd);font-size:40px;color:var(--green-900);letter-spacing:-.005em;line-height:.95}
+.path-card.club .path-card-title{color:var(--blush-50)}
+.path-card-product{font-family:var(--fl);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-700);margin-top:10px;display:inline-flex;align-items:center;gap:8px}
+.path-card.club .path-card-product{color:var(--blush-100)}
+.path-card-product::before{content:'';width:6px;height:6px;background:var(--coral);border-radius:50%}
+.path-card-desc{font-family:var(--fb);font-size:19px;color:var(--green-700);line-height:1.4;margin-top:8px}
+.path-card.club .path-card-desc{color:rgba(243,210,214,.78)}
+.path-card-arrow{align-self:flex-end;margin-top:8px;font-family:var(--fl);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral-d);display:flex;align-items:center;gap:6px;opacity:.7;transition:all .25s}
+.path-card.club .path-card-arrow{color:var(--coral)}
+.path-card:hover .path-card-arrow{opacity:1;gap:10px}
+
+/* ─────────────────────────────────────────
+   OFFER PAGE (compartilhada)
+───────────────────────────────────────── */
+.offer{display:flex;flex-direction:column;gap:24px}
+.offer-back{align-self:flex-start;font-family:var(--fl);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--green-700);padding:8px 0;margin-bottom:-8px}
+.offer-back:hover{color:var(--green-900)}
+
+/* Hero card */
+.offer-hero{background:var(--paper);border-radius:26px;padding:42px 36px;box-shadow:0 20px 50px rgba(30,74,42,.10);position:relative;overflow:hidden}
+.offer-hero.dark{background:var(--green-900);color:var(--blush-50)}
+.offer-hero-eyebrow{font-family:var(--fl);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-d);margin-bottom:14px}
+.offer-hero.dark .offer-hero-eyebrow{color:var(--coral)}
+.offer-hero-title{font-family:var(--fd);font-size:60px;color:var(--green-900);letter-spacing:-.01em;line-height:.95}
+.offer-hero.dark .offer-hero-title{color:var(--blush-50)}
+.offer-hero-promise{font-family:var(--fb);font-style:italic;font-size:23px;color:var(--green-700);line-height:1.45;margin-top:18px}
+.offer-hero.dark .offer-hero-promise{color:rgba(243,210,214,.82)}
+.offer-hero-mechanism{display:inline-block;font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-700);margin-top:18px;padding:8px 16px;background:var(--blush-100);border-radius:999px}
+.offer-hero.dark .offer-hero-mechanism{color:var(--blush-100);background:rgba(232,155,171,.15)}
+
+/* Highlight card (próximo evento OR mecanismo destaque) */
+.offer-highlight{background:linear-gradient(135deg, var(--coral) 0%, var(--coral-d) 100%);color:var(--green-900);padding:26px 28px;border-radius:20px;display:flex;flex-direction:column;gap:8px}
+.offer-highlight-label{font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.offer-highlight-title{font-family:var(--fd);font-size:32px;line-height:1.05;letter-spacing:-.005em}
+.offer-highlight-desc{font-family:var(--fb);font-size:18px;line-height:1.4}
+
+/* Benefits block */
+.benefits{background:var(--cream-50);border-radius:24px;padding:32px 30px}
+.benefits-label{font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.benefits-title{font-family:var(--fd);font-size:32px;color:var(--green-900);letter-spacing:-.005em;line-height:1.05;margin-bottom:18px}
+.benefits-list{display:flex;flex-direction:column}
+.benefit{display:flex;align-items:flex-start;gap:16px;padding:14px 0;border-bottom:1px solid rgba(30,74,42,.10)}
+.benefit:last-child{border-bottom:none}
+.benefit-num{font-family:var(--fd);font-size:24px;color:var(--coral);min-width:36px;line-height:1;padding-top:4px}
+.benefit-content{flex:1}
+.benefit-title{font-family:var(--fl);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-900);margin-bottom:4px}
+.benefit-desc{font-family:var(--fb);font-size:18px;color:var(--green-700);line-height:1.4}
+
+/* Anchoring (economy) */
+.anchor{background:var(--blush-100);border-radius:24px;padding:32px 30px}
+.anchor-label{font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--coral-d);margin-bottom:8px}
+.anchor-title{font-family:var(--fd);font-size:32px;color:var(--green-900);letter-spacing:-.005em;line-height:1.05;margin-bottom:16px}
+.anchor-sub{font-family:var(--fb);font-style:italic;font-size:18px;color:var(--green-700);line-height:1.4;margin-bottom:18px}
+.anchor-table{width:100%;border-collapse:separate;border-spacing:0 4px;font-family:var(--fb)}
+.anchor-table th{font-family:var(--fl);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);padding:8px 12px;text-align:left}
+.anchor-table th:not(:first-child){text-align:right}
+.anchor-table td{padding:10px 12px;font-size:16px;color:var(--green-700)}
+.anchor-table td:first-child{color:var(--green-900)}
+.anchor-table td:not(:first-child){text-align:right}
+.anchor-table td:last-child{font-weight:600;color:var(--green-900)}
+.anchor-table tr:nth-child(even) td{background:rgba(30,74,42,.04)}
+.anchor-total td{font-family:var(--fl)!important;font-size:14px!important;font-weight:700!important;color:var(--green-900)!important;border-top:2px solid rgba(30,74,42,.2);padding-top:14px!important;background:rgba(30,74,42,.06)!important}
+.anchor-total td:last-child{color:var(--coral-d)!important}
+.anchor-conclusion{background:var(--green-900);color:var(--blush-50);padding:20px 22px;border-radius:16px;margin-top:18px;font-family:var(--fb);font-style:italic;font-size:19px;line-height:1.45}
+.anchor-conclusion strong{font-style:normal;color:var(--coral);font-weight:700}
+
+/* Comparison (só Club) */
+.compare{background:var(--paper);border-radius:24px;padding:32px 30px}
+.compare-label{font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.compare-title{font-family:var(--fd);font-size:30px;color:var(--green-900);letter-spacing:-.005em;line-height:1.05;margin-bottom:16px}
+.compare-table{width:100%;border-collapse:separate;border-spacing:0 3px;font-family:var(--fb)}
+.compare-table thead th{font-family:var(--fl);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 14px;text-align:center}
+.compare-table thead th:first-child{text-align:left;color:var(--sage);width:42%}
+.compare-table thead th:nth-child(2){background:rgba(30,74,42,.06);color:var(--green-900);border-radius:8px 0 0 0}
+.compare-table thead th:nth-child(3){background:var(--green-900);color:var(--blush-50);border-radius:0 8px 0 0}
+.compare-table tbody td{padding:10px 14px;font-size:15px;color:var(--green-700)}
+.compare-table tbody td:first-child{color:var(--green-900);font-weight:600}
+.compare-table tbody td:nth-child(2){background:rgba(30,74,42,.04);text-align:center;color:var(--sage)}
+.compare-table tbody td:nth-child(3){background:rgba(30,74,42,.08);text-align:center;color:var(--green-900);font-weight:700}
+
+/* Price block */
+.price-block{background:var(--green-900);color:var(--blush-50);border-radius:26px;padding:38px 32px;display:flex;flex-direction:column;gap:8px;text-align:center;box-shadow:0 20px 50px rgba(30,74,42,.20)}
+.price-block.light{background:var(--paper);color:var(--green-900);box-shadow:0 20px 50px rgba(30,74,42,.10)}
+.price-block-total{font-family:var(--fb);font-size:17px;color:rgba(243,210,214,.55);text-decoration:line-through}
+.price-block.light .price-block-total{color:var(--sage)}
+.price-block-label{font-family:var(--fl);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-top:8px}
+.price-block.light .price-block-label{color:var(--coral-d)}
+.price-block-big{font-family:var(--fd);font-size:96px;color:var(--coral);letter-spacing:-.01em;line-height:1;margin-top:6px}
+.price-block.light .price-block-big{color:var(--green-900)}
+.price-block-cash{font-family:var(--fb);font-size:19px;color:rgba(243,210,214,.65);margin-top:6px}
+.price-block.light .price-block-cash{color:var(--green-700)}
+.price-block-guarantee{font-family:var(--fl);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(243,210,214,.65);margin-top:14px}
+.price-block.light .price-block-guarantee{color:var(--green-700);opacity:.75}
+
+/* Scarcity bar */
+.scarcity{background:var(--coral);color:var(--green-900);padding:18px 22px;border-radius:16px;display:flex;align-items:center;gap:14px}
+.scarcity-dot{width:12px;height:12px;background:var(--green-900);border-radius:50%;flex-shrink:0;animation:pulse 1.6s ease-in-out infinite}
+.scarcity-text{font-family:var(--fl);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.4}
+
+/* CTA */
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.cta{background:var(--green-900);color:var(--blush-50);padding:24px 32px;border-radius:999px;text-align:center;font-family:var(--fl);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;box-shadow:var(--shadow-cta);display:flex;align-items:center;justify-content:center;gap:10px}
+.cta:hover{background:var(--green-800);transform:translateY(-2px);box-shadow:0 18px 44px rgba(30,74,42,.32)}
+.cta.coral{background:var(--coral);color:var(--green-900);box-shadow:0 14px 36px rgba(232,155,171,.42)}
+.cta.coral:hover{background:var(--coral-d);box-shadow:0 18px 44px rgba(232,155,171,.5)}
+.cta-sub{font-family:var(--fl);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--green-700);text-align:center;opacity:.7}
+
+/* ─────────────────────────────────────────
+   DESKTOP (≥720px)
+───────────────────────────────────────── */
+@media (min-width:720px){
+  .app{max-width:860px;padding:48px 40px 64px}
+  .brand-mark{font-size:36px}
+  .start-title{font-size:88px}
+  .start-sub{font-size:24px}
+  .path-card{padding:36px 36px}
+  .path-card-title{font-size:48px}
+  .path-card-desc{font-size:21px}
+  .offer-hero{padding:54px 44px}
+  .offer-hero-title{font-size:72px}
+  .offer-hero-promise{font-size:25px}
+  .offer-highlight{padding:30px 32px}
+  .offer-highlight-title{font-size:38px}
+  .offer-highlight-desc{font-size:20px}
+  .benefits{padding:40px 36px}
+  .benefits-title{font-size:38px}
+  .benefit-num{font-size:28px}
+  .benefit-desc{font-size:20px}
+  .anchor{padding:40px 36px}
+  .anchor-title{font-size:38px}
+  .anchor-table td{font-size:17px;padding:12px 14px}
+  .compare{padding:40px 36px}
+  .compare-title{font-size:36px}
+  .compare-table tbody td{font-size:17px}
+  .price-block{padding:48px 40px}
+  .price-block-big{font-size:120px}
+  .price-block-cash{font-size:22px}
+  .cta{font-size:17px;padding:26px 36px}
+  .scarcity-text{font-size:15px}
+  .start-corner{font-size:96px}
+}
+
+/* ─────────────────────────────────────────
+   MOBILE (<480px)
+───────────────────────────────────────── */
+@media (max-width:480px){
+  .app{padding:22px 16px 36px}
+  .brand-mark{font-size:24px}
+  .brand-tag{font-size:10px;display:none}
+  .start-shell{padding:32px 4px 24px}
+  .start-corner{font-size:54px}
+  .start-title{font-size:46px}
+  .start-sub{font-size:18px}
+  .path-card{padding:22px 22px}
+  .path-card-title{font-size:32px}
+  .path-card-desc{font-size:17px}
+  .path-card-product{font-size:11px}
+  .offer-hero{padding:28px 22px;border-radius:22px}
+  .offer-hero-title{font-size:38px}
+  .offer-hero-promise{font-size:19px}
+  .offer-highlight{padding:20px 22px;border-radius:18px}
+  .offer-highlight-title{font-size:24px}
+  .offer-highlight-desc{font-size:16px}
+  .benefits{padding:22px 20px;border-radius:20px}
+  .benefits-title{font-size:24px}
+  .benefit-num{font-size:22px;min-width:30px}
+  .benefit-title{font-size:12px}
+  .benefit-desc{font-size:16px}
+  .anchor{padding:22px 20px;border-radius:20px}
+  .anchor-title{font-size:24px}
+  .anchor-sub{font-size:16px}
+  .anchor-table th{font-size:10px;padding:6px 8px}
+  .anchor-table td{font-size:13px;padding:8px}
+  .anchor-conclusion{font-size:17px;padding:16px 18px}
+  .compare{padding:22px 20px;border-radius:20px}
+  .compare-title{font-size:22px}
+  .compare-table thead th{font-size:10px;padding:8px 6px}
+  .compare-table tbody td{font-size:13px;padding:8px 6px}
+  .price-block{padding:28px 22px;border-radius:22px}
+  .price-block-big{font-size:64px}
+  .price-block-cash{font-size:16px}
+  .price-block-label{font-size:11px}
+  .scarcity{padding:14px 16px}
+  .scarcity-text{font-size:12px}
+  .cta{font-size:13px;padding:18px 24px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="brand">
+    <div class="brand-mark">Materna</div>
+    <div class="brand-tag">Encontre o que é seu</div>
+  </div>
+  <div id="screens"></div>
+</div>
+
+<script>
+(function(){
+  const screens = document.getElementById('screens');
+
+  function clear(){ screens.innerHTML = ''; }
+  function scrollTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+  // ─────────────────────────────────────────────
+  // START — triagem de público
+  // ─────────────────────────────────────────────
+  function renderStart(){
+    clear();
+    screens.innerHTML = `
+      <div class="screen start-shell">
+        <div class="start-corner tl">✿</div>
+        <div class="start-corner tr">✿</div>
+        <div class="start-corner bl">✿</div>
+        <div class="start-corner br">✿</div>
+        <div class="eyebrow">Antes de tudo</div>
+        <div class="start-title">O que faz<br>mais sentido<br>pra você?</div>
+        <div class="start-sub">Escolha o seu caminho. A oferta certa já está te esperando.</div>
+        <div class="path-cards">
+
+          <button class="path-card" data-path="mae" aria-label="Sou mãe">
+            <div class="path-card-label">Para Mães</div>
+            <div class="path-card-title">Sou mãe</div>
+            <div class="path-card-product">Ingresso do próximo evento + Comunidade Mães Cansadas</div>
+            <div class="path-card-desc">Uma noite só sua + 6 meses de comunidade, profissionais curados e clube de vantagens.</div>
+            <div class="path-card-arrow">Ver minha oferta →</div>
+          </button>
+
+          <button class="path-card club" data-path="club" aria-label="Sou mãe empresária">
+            <div class="path-card-label">Para Mães Empresárias</div>
+            <div class="path-card-title">Sou empresária</div>
+            <div class="path-card-product">Materna Club — para a mãe que tem negócio</div>
+            <div class="path-card-desc">Indicação pessoal da Gabi, IA 24h Brasil, encontros estratégicos e ecossistema nacional.</div>
+            <div class="path-card-arrow">Ver minha oferta →</div>
+          </button>
+
+        </div>
+      </div>
+    `;
+    document.querySelectorAll('.path-card').forEach(c => {
+      c.addEventListener('click', () => {
+        const path = c.dataset.path;
+        if (path === 'mae') renderOfferMae();
+        else renderOfferClub();
+        scrollTop();
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────
+  // OFFER PAGE — Comunidade Mães Cansadas
+  // ─────────────────────────────────────────────
+  function renderOfferMae(){
+    clear();
+    screens.innerHTML = `
+      <div class="screen offer">
+        <button class="offer-back" id="back-btn">← Voltar à escolha</button>
+
+        <div class="offer-hero">
+          <div class="offer-hero-eyebrow">A oferta certa pra você</div>
+          <div class="offer-hero-title">Comunidade<br>Mães Cansadas</div>
+          <div class="offer-hero-promise">Conecte-se a mães que entendem exatamente o que você vive, acesse os melhores profissionais da sua cidade — e economize nas compras do dia a dia com o clube de vantagens.</div>
+          <div class="offer-hero-mechanism">Mecanismo único · Rede de Leveza Materna</div>
+        </div>
+
+        <div class="offer-highlight">
+          <div class="offer-highlight-label">★ Bônus incluso nesta oferta</div>
+          <div class="offer-highlight-title">Ingresso da próxima Noite do Pijama</div>
+          <div class="offer-highlight-desc">Uma noite só sua — sem culpa, sem performance. Com mães reais, cuidado humano, leveza e conexão. Vaga garantida no próximo evento presencial da Gabi.</div>
+        </div>
+
+        <div class="benefits">
+          <div class="benefits-label">O que está incluído nos 6 meses</div>
+          <div class="benefits-title">Tudo o que você leva hoje</div>
+          <div class="benefits-list">
+            <div class="benefit"><div class="benefit-num">01</div><div class="benefit-content"><div class="benefit-title">Ingresso do próximo evento</div><div class="benefit-desc">Vaga garantida na próxima Noite do Pijama da Gabi.</div></div></div>
+            <div class="benefit"><div class="benefit-num">02</div><div class="benefit-content"><div class="benefit-title">6 meses de comunidade curada</div><div class="benefit-desc">Mães reais, sem grupo de WhatsApp bagunçado. Moderada e cuidada.</div></div></div>
+            <div class="benefit"><div class="benefit-num">03</div><div class="benefit-content"><div class="benefit-title">Encontros mensais entre mães</div><div class="benefit-desc">Café, roda de conversa, noite de cuidado — todo mês. Pertencimento real.</div></div></div>
+            <div class="benefit"><div class="benefit-num">04</div><div class="benefit-content"><div class="benefit-title">Plataforma + IA da Gabi</div><div class="benefit-desc">A IA treinada com a voz da Gabi recomenda o profissional certo — na hora que você precisar.</div></div></div>
+            <div class="benefit"><div class="benefit-num">05</div><div class="benefit-content"><div class="benefit-title">Curadoria dos melhores profissionais</div><div class="benefit-desc">Pediatra, psicóloga, dentista, nutricionista — só quem a Gabi confia.</div></div></div>
+            <div class="benefit"><div class="benefit-num">06</div><div class="benefit-content"><div class="benefit-title">Clube de descontos no dia a dia</div><div class="benefit-desc">Roupas, medicações, consultas, escola, brinquedos. Economia que se paga sozinha.</div></div></div>
+            <div class="benefit"><div class="benefit-num">07</div><div class="benefit-content"><div class="benefit-title">Aulas e cursos gravados</div><div class="benefit-desc">Conteúdo sobre maternidade e empreendedorismo no seu ritmo.</div></div></div>
+            <div class="benefit"><div class="benefit-num">08</div><div class="benefit-content"><div class="benefit-title">25% de desconto em eventos</div><div class="benefit-desc">Todos os próximos eventos da Gabi com preço especial.</div></div></div>
+            <div class="benefit"><div class="benefit-num">09</div><div class="benefit-content"><div class="benefit-title">Acesso a especialista em saúde</div><div class="benefit-desc">Dúvidas materno-infantis direto com profissional na comunidade.</div></div></div>
+            <div class="benefit"><div class="benefit-num">10</div><div class="benefit-content"><div class="benefit-title">Garantia completa de 7 dias</div><div class="benefit-desc">Se não for pra você, devolvemos tudo. Sem burocracia.</div></div></div>
+          </div>
+        </div>
+
+        <div class="anchor">
+          <div class="anchor-label">A economia que se paga sozinha</div>
+          <div class="anchor-title">Quanto uma mãe gasta — e quanto pode economizar</div>
+          <div class="anchor-sub">Com o clube de vantagens, a Comunidade pode se pagar sozinha. Veja:</div>
+          <table class="anchor-table">
+            <thead>
+              <tr><th>Categoria</th><th>Gasto / ano</th><th>Desc.</th><th>Economia</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mensalidade escolar</td><td>R$ 12.000</td><td>10%</td><td>R$ 1.200</td></tr>
+              <tr><td>Material e uniforme escolar</td><td>R$ 2.500</td><td>10%</td><td>R$ 250</td></tr>
+              <tr><td>Consultas médicas</td><td>R$ 2.160</td><td>10%</td><td>R$ 216</td></tr>
+              <tr><td>Roupas e tênis de criança</td><td>R$ 2.250</td><td>15%</td><td>R$ 337</td></tr>
+              <tr><td>Medicações</td><td>R$ 1.440</td><td>10%</td><td>R$ 144</td></tr>
+              <tr><td>Brinquedos e eletrônicos</td><td>R$ 2.160</td><td>10%</td><td>R$ 204</td></tr>
+              <tr class="anchor-total"><td>Total recorrente / ano</td><td>R$ 22.510</td><td>—</td><td>R$ 2.351</td></tr>
+            </tbody>
+          </table>
+          <div class="anchor-conclusion">Sua economia anual pode ser <strong>6× maior</strong> que o investimento. E você ainda leva o ingresso do próximo evento da Gabi de bônus.</div>
+        </div>
+
+        <div class="price-block">
+          <div class="price-block-total">Valor total percebido: R$ 2.814</div>
+          <div class="price-block-label">Oferta única — 12× de</div>
+          <div class="price-block-big">R$ 39,98</div>
+          <div class="price-block-cash">ou R$ 387 à vista</div>
+          <div class="price-block-guarantee">7 dias de garantia · Acesso imediato</div>
+        </div>
+
+        <div class="scarcity">
+          <div class="scarcity-dot"></div>
+          <div class="scarcity-text">Oferta única e especial — só para quem entrar hoje</div>
+        </div>
+
+        <div class="cta-wrap">
+          <a href="https://pay.cakto.com.br/oqkqsnb_892565" class="cta" id="cta" target="_blank" rel="noopener">Quero minha vaga agora →</a>
+          <div class="cta-sub">Você cai direto no checkout seguro · Cakto Pay</div>
+        </div>
+      </div>
+    `;
+    bindOfferEvents('mae');
+  }
+
+  // ─────────────────────────────────────────────
+  // OFFER PAGE — Materna Club
+  // ─────────────────────────────────────────────
+  function renderOfferClub(){
+    clear();
+    screens.innerHTML = `
+      <div class="screen offer">
+        <button class="offer-back" id="back-btn">← Voltar à escolha</button>
+
+        <div class="offer-hero dark">
+          <div class="offer-hero-eyebrow">A oferta certa pra você</div>
+          <div class="offer-hero-title">Materna Club</div>
+          <div class="offer-hero-promise">Torne-se a empresária referência para mães da sua cidade e do país através da Cadeira de Autoridade Materna.</div>
+          <div class="offer-hero-mechanism">Mecanismo único · Cadeira de Autoridade Materna</div>
+        </div>
+
+        <div class="offer-highlight">
+          <div class="offer-highlight-label">★ Diferencial nesta oferta</div>
+          <div class="offer-highlight-title">IA da Gabi Fraga treinada — 24h Brasil</div>
+          <div class="offer-highlight-desc">Uma IA com a voz e os valores da Gabi recomenda o seu negócio para mães em todo o Brasil — enquanto você dorme. Nenhum anúncio compra esse tipo de indicação.</div>
+        </div>
+
+        <div class="benefits">
+          <div class="benefits-label">O que está incluído nos 6 meses</div>
+          <div class="benefits-title">Tudo o que você leva hoje</div>
+          <div class="benefits-list">
+            <div class="benefit"><div class="benefit-num">01</div><div class="benefit-content"><div class="benefit-title">Acesso exclusivo Materna</div><div class="benefit-desc">Sua marca dentro do ecossistema da Gabi por 6 meses.</div></div></div>
+            <div class="benefit"><div class="benefit-num">02</div><div class="benefit-content"><div class="benefit-title">Indicação ativa e pessoal da Gabi</div><div class="benefit-desc">Recomendação direta para 200+ mães locais — com a autoridade clínica de 18 anos dela.</div></div></div>
+            <div class="benefit"><div class="benefit-num">03</div><div class="benefit-content"><div class="benefit-title">IA da Gabi Fraga treinada</div><div class="benefit-desc">Recomenda seu negócio para mães do Brasil inteiro, 24 horas por dia.</div></div></div>
+            <div class="benefit"><div class="benefit-num">04</div><div class="benefit-content"><div class="benefit-title">Encontros estratégicos individuais</div><div class="benefit-desc">Conversa estratégica com a Gabi e com outras empresárias parceiras.</div></div></div>
+            <div class="benefit"><div class="benefit-num">05</div><div class="benefit-content"><div class="benefit-title">3 Imersões presenciais com experts</div><div class="benefit-desc">Desenvolvimento de negócio com quem realmente entende do nicho materno.</div></div></div>
+            <div class="benefit"><div class="benefit-num">06</div><div class="benefit-content"><div class="benefit-title">3 Encontros de saúde e bem-estar</div><div class="benefit-desc">Você primeiro. Sua marca depois. Cuidado integral para empresária.</div></div></div>
+            <div class="benefit"><div class="benefit-num">07</div><div class="benefit-content"><div class="benefit-title">Ativação em 3 eventos presenciais</div><div class="benefit-desc">Sua marca no palco, ativação e exposição nos próximos eventos da Gabi.</div></div></div>
+            <div class="benefit"><div class="benefit-num">08</div><div class="benefit-content"><div class="benefit-title">Plataforma + vitrine digital + SEO</div><div class="benefit-desc">Aparecer nas buscas com o selo Materna Club.</div></div></div>
+            <div class="benefit"><div class="benefit-num">09</div><div class="benefit-content"><div class="benefit-title">Visibilidade e networking nacional</div><div class="benefit-desc">Ecossistema local + nacional da Gabi. Cachoeiro até o Brasil inteiro.</div></div></div>
+            <div class="benefit"><div class="benefit-num">10</div><div class="benefit-content"><div class="benefit-title">Ingresso no próximo evento</div><div class="benefit-desc">Sua presença garantida na próxima Noite do Pijama.</div></div></div>
+            <div class="benefit"><div class="benefit-num">11</div><div class="benefit-content"><div class="benefit-title">Garantia completa de 7 dias</div><div class="benefit-desc">Se não for pra você, devolvemos tudo. Sem burocracia.</div></div></div>
+          </div>
+        </div>
+
+        <div class="compare">
+          <div class="compare-label">Compare antes de decidir</div>
+          <div class="compare-title">Materna Club vs. Grupo de Empresários</div>
+          <table class="compare-table">
+            <thead>
+              <tr><th></th><th>Grupo Empresários</th><th>Materna Club</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Investimento em 6 meses</td><td>R$ 3.500+</td><td>R$ 947</td></tr>
+              <tr><td>Reuniões obrigatórias</td><td>26× (toda semana)</td><td>Nenhuma</td></tr>
+              <tr><td>Horário</td><td>7h da manhã</td><td>Flexível</td></tr>
+              <tr><td>Quem você acessa</td><td>Outros empresários</td><td>Mães com poder de compra</td></tr>
+              <tr><td>Endosso de especialista</td><td>Não</td><td>Sim — Gabi Fraga</td></tr>
+              <tr><td>Indicação ativa pro nicho</td><td>Depende</td><td>Feita pela Gabi</td></tr>
+              <tr><td>IA recomendando 24h</td><td>Não</td><td>Sim — Brasil inteiro</td></tr>
+              <tr><td>Garantia de reembolso</td><td>Não</td><td>7 dias</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="price-block">
+          <div class="price-block-total">Valor total percebido: R$ 19.747</div>
+          <div class="price-block-label">Oferta única — 12× de</div>
+          <div class="price-block-big">R$ 97,81</div>
+          <div class="price-block-cash">ou R$ 947 à vista</div>
+          <div class="price-block-guarantee">7 dias de garantia · Acesso imediato</div>
+        </div>
+
+        <div class="scarcity">
+          <div class="scarcity-dot"></div>
+          <div class="scarcity-text">Oferta única e especial — só para quem entrar hoje</div>
+        </div>
+
+        <div class="cta-wrap">
+          <a href="https://pay.cakto.com.br/39fxtn9_892572" class="cta coral" id="cta" target="_blank" rel="noopener">Quero entrar no Materna Club →</a>
+          <div class="cta-sub">Você cai direto no checkout seguro · Cakto Pay</div>
+        </div>
+      </div>
+    `;
+    bindOfferEvents('club');
+  }
+
+  function bindOfferEvents(path){
+    document.getElementById('back-btn').addEventListener('click', () => { renderStart(); scrollTop(); });
+    document.getElementById('cta').addEventListener('click', () => {
+      try {
+        if (window.gtag) window.gtag('event', 'checkout_click', { path: path });
+        if (window.fbq) window.fbq('track', 'InitiateCheckout', { path: path });
+      } catch(_){}
+    });
+  }
+
+  // Boot
+  renderStart();
+})();
+</script>
+</body>
+</html>
