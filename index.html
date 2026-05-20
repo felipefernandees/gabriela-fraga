@@ -6,7 +6,7 @@
 <title>Materna — Encontre o que é seu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --blush-50:#FBE9EC; --blush-100:#F3D2D6; --blush-200:#EBB9C0;
@@ -23,7 +23,7 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 ul,ol{list-style:none}
-html,body{background:var(--blush-100);min-height:100vh;font-family:var(--fb);color:var(--green-900);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+html,body{background:var(--blush-100);min-height:100vh;font-family:var(--fb);font-weight:500;color:var(--green-900);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
 body{background:radial-gradient(ellipse at top, var(--blush-100), var(--blush-50) 80%)}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
@@ -55,7 +55,7 @@ a{color:inherit;text-decoration:none}
 .start-corner.bl{bottom:30px;left:0;transform:rotate(25deg)}
 .start-corner.br{bottom:30px;right:0;transform:rotate(-25deg)}
 .start-title{font-family:var(--fd);font-size:68px;color:var(--green-900);letter-spacing:-.01em;line-height:.95;margin-top:8px}
-.start-sub{font-family:var(--fb);font-style:italic;font-size:22px;color:var(--green-700);line-height:1.4;max-width:480px;margin-top:6px}
+.start-sub{font-family:var(--fb);font-style:italic;font-weight:600;font-size:22px;color:var(--green-700);line-height:1.4;max-width:480px;margin-top:6px}
 .start-meta{font-family:var(--fl);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:4px}
 
 /* Path cards (escolha) */
@@ -90,7 +90,7 @@ a{color:inherit;text-decoration:none}
 .offer-hero.dark .offer-hero-eyebrow{color:var(--coral)}
 .offer-hero-title{font-family:var(--fd);font-size:60px;color:var(--green-900);letter-spacing:-.01em;line-height:.95}
 .offer-hero.dark .offer-hero-title{color:var(--blush-50)}
-.offer-hero-promise{font-family:var(--fb);font-style:italic;font-size:23px;color:var(--green-700);line-height:1.45;margin-top:18px}
+.offer-hero-promise{font-family:var(--fb);font-style:italic;font-weight:600;font-size:23px;color:var(--green-700);line-height:1.45;margin-top:18px}
 .offer-hero.dark .offer-hero-promise{color:rgba(243,210,214,.82)}
 .offer-hero-mechanism{display:inline-block;font-family:var(--fl);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-700);margin-top:18px;padding:8px 16px;background:var(--blush-100);border-radius:999px}
 .offer-hero.dark .offer-hero-mechanism{color:var(--blush-100);background:rgba(232,155,171,.15)}
@@ -123,8 +123,8 @@ a{color:inherit;text-decoration:none}
 .anchor-table th:not(:first-child){text-align:right}
 .anchor-table td{padding:10px 12px;font-size:16px;color:var(--green-700)}
 .anchor-table td:first-child{color:var(--green-900)}
-.anchor-table td:not(:first-child){text-align:right}
-.anchor-table td:last-child{font-weight:600;color:var(--green-900)}
+.anchor-table td:not(:first-child){font-family:var(--fl);font-size:14px;text-align:right}
+.anchor-table td:last-child{font-weight:700;color:var(--green-900)}
 .anchor-table tr:nth-child(even) td{background:rgba(30,74,42,.04)}
 .anchor-total td{font-family:var(--fl)!important;font-size:14px!important;font-weight:700!important;color:var(--green-900)!important;border-top:2px solid rgba(30,74,42,.2);padding-top:14px!important;background:rgba(30,74,42,.06)!important}
 .anchor-total td:last-child{color:var(--coral-d)!important}
@@ -238,6 +238,7 @@ a{color:inherit;text-decoration:none}
   .anchor-sub{font-size:16px}
   .anchor-table th{font-size:10px;padding:6px 8px}
   .anchor-table td{font-size:13px;padding:8px}
+  .anchor-table td:not(:first-child){font-size:12px}
   .anchor-conclusion{font-size:17px;padding:16px 18px}
   .compare{padding:22px 20px;border-radius:20px}
   .compare-title{font-size:22px}
@@ -296,7 +297,7 @@ a{color:inherit;text-decoration:none}
           <button class="path-card club" data-path="club" aria-label="Sou mãe empresária">
             <div class="path-card-label">Para Mães Empresárias</div>
             <div class="path-card-title">Sou empresária</div>
-            <div class="path-card-product">Materna Club — para a mãe que tem negócio</div>
+            <div class="path-card-product">Materna Club — para a mãe que tem negócio + Ingresso do próximo evento</div>
             <div class="path-card-desc">Indicação pessoal da Gabi, IA 24h Brasil, encontros estratégicos e ecossistema nacional.</div>
             <div class="path-card-arrow">Ver minha oferta →</div>
           </button>
@@ -332,7 +333,7 @@ a{color:inherit;text-decoration:none}
 
         <div class="offer-highlight">
           <div class="offer-highlight-label">★ Bônus incluso nesta oferta</div>
-          <div class="offer-highlight-title">Ingresso da próxima Noite do Pijama</div>
+          <div class="offer-highlight-title">Ingresso do próximo evento</div>
           <div class="offer-highlight-desc">Uma noite só sua — sem culpa, sem performance. Com mães reais, cuidado humano, leveza e conexão. Vaga garantida no próximo evento presencial da Gabi.</div>
         </div>
 
@@ -340,7 +341,7 @@ a{color:inherit;text-decoration:none}
           <div class="benefits-label">O que está incluído nos 6 meses</div>
           <div class="benefits-title">Tudo o que você leva hoje</div>
           <div class="benefits-list">
-            <div class="benefit"><div class="benefit-num">01</div><div class="benefit-content"><div class="benefit-title">Ingresso do próximo evento</div><div class="benefit-desc">Vaga garantida na próxima Noite do Pijama da Gabi.</div></div></div>
+            <div class="benefit"><div class="benefit-num">01</div><div class="benefit-content"><div class="benefit-title">Ingresso do próximo evento</div><div class="benefit-desc">Vaga garantida no próximo evento da Gabi.</div></div></div>
             <div class="benefit"><div class="benefit-num">02</div><div class="benefit-content"><div class="benefit-title">6 meses de comunidade curada</div><div class="benefit-desc">Mães reais, sem grupo de WhatsApp bagunçado. Moderada e cuidada.</div></div></div>
             <div class="benefit"><div class="benefit-num">03</div><div class="benefit-content"><div class="benefit-title">Encontros mensais entre mães</div><div class="benefit-desc">Café, roda de conversa, noite de cuidado — todo mês. Pertencimento real.</div></div></div>
             <div class="benefit"><div class="benefit-num">04</div><div class="benefit-content"><div class="benefit-title">Plataforma + IA da Gabi</div><div class="benefit-desc">A IA treinada com a voz da Gabi recomenda o profissional certo — na hora que você precisar.</div></div></div>
@@ -431,7 +432,7 @@ a{color:inherit;text-decoration:none}
             <div class="benefit"><div class="benefit-num">07</div><div class="benefit-content"><div class="benefit-title">Ativação em 3 eventos presenciais</div><div class="benefit-desc">Sua marca no palco, ativação e exposição nos próximos eventos da Gabi.</div></div></div>
             <div class="benefit"><div class="benefit-num">08</div><div class="benefit-content"><div class="benefit-title">Plataforma + vitrine digital + SEO</div><div class="benefit-desc">Aparecer nas buscas com o selo Materna Club.</div></div></div>
             <div class="benefit"><div class="benefit-num">09</div><div class="benefit-content"><div class="benefit-title">Visibilidade e networking nacional</div><div class="benefit-desc">Ecossistema local + nacional da Gabi. Cachoeiro até o Brasil inteiro.</div></div></div>
-            <div class="benefit"><div class="benefit-num">10</div><div class="benefit-content"><div class="benefit-title">Ingresso no próximo evento</div><div class="benefit-desc">Sua presença garantida na próxima Noite do Pijama.</div></div></div>
+            <div class="benefit"><div class="benefit-num">10</div><div class="benefit-content"><div class="benefit-title">Ingresso no próximo evento</div><div class="benefit-desc">Sua presença garantida no próximo evento.</div></div></div>
             <div class="benefit"><div class="benefit-num">11</div><div class="benefit-content"><div class="benefit-title">Garantia completa de 7 dias</div><div class="benefit-desc">Se não for pra você, devolvemos tudo. Sem burocracia.</div></div></div>
           </div>
         </div>
